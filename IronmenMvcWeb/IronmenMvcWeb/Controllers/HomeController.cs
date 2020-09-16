@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using IronmenMvcWeb.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace IronmenMvcWeb.Controllers
 {
@@ -38,7 +39,8 @@ namespace IronmenMvcWeb.Controllers
         [Route("Index")]
         public IActionResult Index()
         {
-            ViewData["Message"] = "Your application description page HiHi.";
+            /*ViewData["Message"] = "Your application description page HiHi.";
+            ViewBag['haha'] = "這個是ViewBag";
             Pokemon[] pokemon = new Pokemon[2];
             pokemon[0] = new Pokemon()
             {
@@ -53,11 +55,31 @@ namespace IronmenMvcWeb.Controllers
                 Name = "小火龍",
                 Property = "火系"
             };
-            /*Test[] test = new Test[2];
+            Test[] test = new Test[2];
             test[0] = new Test() { ID = 1 };
             test[1] = new Test() { ID = 2 };*/
 
-            return View(pokemon);
+            var items = new List<SelectListItem>()
+            {
+                new SelectListItem()
+                {
+                    Text = "火系",
+                    Value = "火系"
+                },
+                    new SelectListItem()
+                {
+                    Text = "水系",
+                    Value = "水系"
+                },
+                    new SelectListItem()
+                {
+                    Text = "草系",
+                    Value = "草系"
+                }
+            };
+            ViewData["items"] = items;
+
+            return View(items);
         }
 
         public IActionResult About()
